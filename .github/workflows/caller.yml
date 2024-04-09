@@ -18,9 +18,9 @@ jobs:
           github.rest.repos.createDispatchEvent({
             owner: 'ngauravit',
             repo: 'called',
-            event_type: 'trigger-build',
+            event_type: 'trigger-build'
             #client_payload: { some-data: 'This data is from Repo A' }
-            })
+            #})
 
 
     - name: Wait for Repo B Workflow
