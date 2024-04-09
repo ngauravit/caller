@@ -13,6 +13,8 @@ jobs:
 
     - name: Trigger Workflow in Repo B
       uses: actions/github-script@v6
+      env:
+        GITHUB_TOKEN: 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
       with:
         script: |
           github.rest.repos.createDispatchEvent({
@@ -24,7 +26,7 @@ jobs:
               branch_name: ${{ github.ref }}
             }
           })
-        github-token: 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
+        # github-token: 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
         debug: true
         user-agent: actions/github-script
         result-encoding: json
