@@ -18,13 +18,8 @@ jobs:
           github.rest.repos.createDispatchEvent({
             owner: 'ngauravit',
             repo: 'called',
-            event_type: 'trigger-build',
-            client_payload: {
-              build_type: 'unit-tests'
-              #branch_name: ${{ github.ref }}
-            }
-          })
-
+            event_type: 'trigger-build'
+            
     - name: Wait for Repo B Workflow
       run: |
         workflow_run_id=$(curl -sSL -X GET "https://api.github.com/repos/ngauravit/called/actions/workflows/your-workflow-name.yml/runs?branch=${{ github.sha }}" | jq -r '.workflow_runs[0].id')
