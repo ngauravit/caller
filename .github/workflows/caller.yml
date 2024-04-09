@@ -22,7 +22,7 @@ jobs:
             repo: 'called',
             event_type: 'trigger-build',
             client_payload: {
-              build_type: 'unit-tests',
+              build_type: 'unit-tests'
               #branch_name: ${{ github.ref }}
             }
           })
