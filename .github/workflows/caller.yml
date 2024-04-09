@@ -18,13 +18,13 @@ jobs:
           github.rest.repos.createDispatchEvent({
             owner: 'ngauravit',
             repo: 'called',
-            event_type: 'trigger-build'
-            client_payload: { 
+            event_type: 'trigger-build',
+            client_payload: {
               build_type: 'unit-tests',
               branch_name: refs/heads/main
             }
           })
-        github-token: ${{ secrets.ACCESS_TOKEN}}  # Replace with the actual secret name
+        github-token: ${{ secrets.ACCESS_TOKEN }}  # Replace with actual secret name
         debug: false
         user-agent: actions/github-script
         result-encoding: json
