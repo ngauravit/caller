@@ -21,9 +21,15 @@ jobs:
             event_type: 'trigger-build'
             client_payload: { 
               build_type: 'unit-tests',
-              branch_name: ${{ github.ref }}
-              }
-            })
+              branch_name: refs/heads/main
+            }
+          })
+        github-token: ${{ secrets.ACCESS_TOKEN}}  # Replace with the actual secret name
+        debug: false
+        user-agent: actions/github-script
+        result-encoding: json
+        retries: 0
+        retry-exempt-status-codes: 400,401,403,404,422
 
 
     - name: Wait for Repo B Workflow
