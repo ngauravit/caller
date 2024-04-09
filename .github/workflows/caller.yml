@@ -21,11 +21,11 @@ jobs:
             event_type: 'trigger-build',
             client_payload: {
               build_type: 'unit-tests',
-              branch_name: refs/heads/main
+              branch_name: ${{ github.ref }}
             }
           })
-        github-token: ${{ secrets.ACCESS_TOKEN }}  # Replace with actual secret name
-        debug: false
+        github-token: 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
+        debug: true
         user-agent: actions/github-script
         result-encoding: json
         retries: 0
