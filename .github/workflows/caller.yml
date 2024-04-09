@@ -12,13 +12,16 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Trigger Workflow in Repo B
-      uses: shivfu/process-dispatch@v4
+      uses: actions/github-script@v6
       with:
-        repo-token: ${{ secrets.ACCESS_TOKEN }}  # Replace with your PAT for Repo B
-        repo: ngauravit/called  # Replace with your Repo B owner and name
-        ref: ${{ github.sha }}
-        event-type: trigger-build  # Custom event type
-        # inputs: some-data: 'This data is from Repo A'  # Optional input for Repo B
+        script: |
+          github.rest.repos.createDispatchEvent({
+            owner: 'ngauravit',
+            repo: 'called',
+            event_type: 'trigger-build',
+            #client_payload: { some-data: 'This data is from Repo A' }
+            })
+
 
     - name: Wait for Repo B Workflow
       run: |
