@@ -19,7 +19,7 @@ jobs:
             owner: 'ngauravit',
             repo: 'called',
             event_type: 'trigger-build' 
-          })
+          });
             
     - name: Wait for Repo B Workflow
       run: |
