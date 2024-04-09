@@ -18,7 +18,7 @@ jobs:
         repo: ngauravit/called  # Replace with your Repo B owner and name
         ref: ${{ github.sha }}
         event-type: trigger-build  # Custom event type
-        inputs: some-data: 'This data is from Repo A'  # Optional input for Repo B
+        # inputs: some-data: 'This data is from Repo A'  # Optional input for Repo B
 
     - name: Wait for Repo B Workflow
       run: |
