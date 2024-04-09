@@ -1,0 +1,41 @@
+name: Trigger Workflow in Repo B
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Trigger Workflow in Repo B
+      uses: shivfu/process-dispatch@v4
+      with:
+        repo-token: ${{ secrets.ACCESS_TOKEN }}  # Replace with your PAT for Repo B
+        repo: ngauravit/called  # Replace with your Repo B owner and name
+        ref: ${{ github.sha }}
+        event-type: trigger-build  # Custom event type
+        inputs: some-data: 'This data is from Repo A'  # Optional input for Repo B
+
+    - name: Wait for Repo B Workflow
+      run: |
+        workflow_run_id=$(curl -sSL -X GET "https://api.github.com/repos/ngauravit/called/actions/workflows/your-workflow-name.yml/runs?branch=${{ github.sha }}" | jq -r '.workflow_runs[0].id')
+        echo "Waiting for Repo B workflow run ($workflow_run_id)..."
+        while true; do
+          workflow_status=$(curl -sSL -X GET "https://api.github.com/repos/ngauravit/called/actions/workflows/$workflow_run_id" | jq -r '.status')
+          if [[ "$workflow_status" == "completed" ]]; then
+            echo "Repo B workflow completed successfully."
+            break
+          elif [[ "$workflow_status" == "failure" ]]; then
+            echo "Repo B workflow failed!"
+            exit 1
+          fi
+          sleep 60
+        done
+
+    # - name: Proceed with further tasks (only after successful Repo B workflow)
+    #   # Add your further workflow steps here
+    #   # These steps will only run after Repo B workflow finishes successfully
