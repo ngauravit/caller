@@ -12,7 +12,7 @@ jobs:
     - name: Trigger Workflow in Repo B
       uses: actions/github-script@v6
       env:
-        GITHUB_TOKEN: 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
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         script: |
           github.rest.repos.createDispatchEvent({
