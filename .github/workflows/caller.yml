@@ -23,7 +23,7 @@ jobs:
             event_type: 'trigger-build',
             client_payload: {
               build_type: 'unit-tests',
-              branch_name: ${{ github.ref }}
+              #branch_name: ${{ github.ref }}
             }
           })
         # github-token: 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
