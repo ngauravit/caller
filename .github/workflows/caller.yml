@@ -20,6 +20,12 @@ jobs:
             repo: 'called',
             event_type: 'trigger-build' 
           });
+        github-token: ${{ secrets.ACCESS_TOKEN }} 
+        debug: false
+        user-agent: actions/github-script
+        result-encoding: json
+        retries: 0
+        retry-exempt-status-codes: 400,401,403,404,422
             
     - name: Wait for Repo B Workflow
       run: |
